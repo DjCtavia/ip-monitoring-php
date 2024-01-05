@@ -15,6 +15,7 @@
                 <label for="addressIP"><h1>Add new IP Address</h1></label>
                 <input type="text" name="addressIP" id="addressIP" placeholder="192.168.0.128" tabindex="0" autofocus>
             </div>
+            <p id="errorDiagIpAdd"></p>
             <div>
                 <button value="cancel" formmethod="dialog" tabindex="2">Cancel</button>
                 <button id="confirmBtn" value="default" tabindex="1">Add IP</button>
@@ -29,6 +30,7 @@
             Add new IP
         </button>
     </div>
+    <script src="assets/js/api.js"></script>
     <script src="assets/js/script.js"></script>
 </body>
 </html>
