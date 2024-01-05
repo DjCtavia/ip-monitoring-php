@@ -9,15 +9,15 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <dialog id="addNewIPDialog">
+    <dialog id="addNewIPDialog" tabindex="-1">
         <form>
             <div>
                 <label for="addressIP"><h1>Add new IP Address</h1></label>
-                <input type="text" name="addressIP" id="addressIP" placeholder="192.168.0.128">
+                <input type="text" name="addressIP" id="addressIP" placeholder="192.168.0.128" tabindex="0" autofocus>
             </div>
             <div>
-                <button value="cancel" formmethod="dialog">Cancel</button>
-                <button id="confirmBtn" value="default">Add IP</button>
+                <button value="cancel" formmethod="dialog" tabindex="2">Cancel</button>
+                <button id="confirmBtn" value="default" tabindex="1">Add IP</button>
             </div>
         </form>
     </dialog>
