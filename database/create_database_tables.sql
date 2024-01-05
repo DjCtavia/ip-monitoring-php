@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS `ip_address`
 (
     id          INT PRIMARY KEY                    NOT NULL,
     ip_address  VARCHAR(255)                       NOT NULL,
+    ip_type     VARCHAR(255)                       NOT NULL,
     description TEXT,
     created_at  DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
