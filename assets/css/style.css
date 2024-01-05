@@ -102,3 +102,32 @@ body {
     background-color: green;
     padding: 0.65rem 3rem;
 }
+
+/*Monitoring cards*/
+.card-holder {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem;
+}
+
+.card-monitoring {
+    padding: 1rem 2rem;
+    width: 300px;
+    background-color: gray;
+}
+
+.card-monitoring p {
+    margin: 0;
+}
+
+.card-monitoring.ping-reached {
+    background-color: #006500;
+    border: 1px solid #165201;
+}
+
+.card-monitoring.ping-error {
+    background-color: #590712;
+    border: 1px solid #520321;
+}
