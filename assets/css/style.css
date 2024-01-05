@@ -118,6 +118,12 @@ body {
     background-color: gray;
 }
 
+.card-monitoring #description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 20ch;
+}
+
 .card-monitoring p {
     margin: 0;
 }

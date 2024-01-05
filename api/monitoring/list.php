@@ -14,7 +14,7 @@ $db = $dbConnection->getConnection();
 if ($db->connect_error) {
     $response = ['status' => 'error', 'message' => $db->connect_error];
 } else {
-    $stmt = $db->prepare("SELECT ip_address.ip_address, ip_address.ip_type, ip_address.description, ip_monitoring_status.ping_status FROM ip_address LEFT JOIN ip_monitoring_status ON ip_address.id = ip_monitoring_status.ip_address_id");
+    $stmt = $db->prepare("SELECT ip_address.ip_address, ip_address.ip_type, ip_address.description, ip_monitoring_status.ping_status, ip_monitoring_status.timestamp FROM ip_address LEFT JOIN ip_monitoring_status ON ip_address.id = ip_monitoring_status.ip_address_id");
     $success = $stmt->execute();
 
     if ($success) {

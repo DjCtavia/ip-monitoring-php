@@ -43,12 +43,10 @@
 
 
     <template id="ip_monitoring_card_template">
-        <h2>IP Address</h2>
+        <h3 id="description">Description</h3>
         <p id="ipAddress">192.168.0.1</p>
-        <h2>IP Type</h2>
-        <p id="ipType">IPv4</p>
-        <h2>Ping Status</h2>
         <p id="pingStatus">Online</p>
+        <p id="timestamp"></p>
     </template>
     <script src="assets/js/api.js"></script>
     <script src="assets/js/script.js"></script>
