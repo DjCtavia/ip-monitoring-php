@@ -20,7 +20,7 @@ class DatabaseConnection
         $this->conn = new mysqli(DatabaseConfig::$host, DatabaseConfig::$username, DatabaseConfig::$password, DatabaseConfig::$database);
 
         if ($this->conn->connect_error) {
-            die(["error" => "Connection to database failed: " . $this->conn->connect_error]);
+            die(json_encode(['status' => 'error', 'message' => "Connection to database failed: " . $this->conn->connect_error]));
         }
     }
 

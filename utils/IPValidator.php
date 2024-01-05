@@ -19,12 +19,13 @@ class IPValidator
 
     private function validateIP(): void
     {
-        if (filter_var($this->ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
-            $this->ipType = IPTypeEnum::IPV6;
-        } elseif (filter_var($this->ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
-            $this->ipType = IPTypeEnum::IPV6;
+        $isIPv4 = filter_var($this->ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
+        $isIPv6 = filter_var($this->ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6);
+
+        if ($isIPv4 || $isIPv6) {
+            $this->ipType = $isIPv4 ? IPTypeEnum::IPV4 : IPTypeEnum::IPV6;
         } else {
-            die(["error" => "Invalid IP address: {$this->ip}"]);
+            die(json_encode(['status' => 'error', 'message' => "Invalid IP address: {$this->ip}"]));
         }
     }
 
