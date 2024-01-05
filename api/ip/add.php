@@ -6,6 +6,10 @@ use utils\IPValidator;
 require_once __DIR__ . '/../../database/DatabaseConnection.php';
 require_once __DIR__ . '/../../utils/IPValidator.php';
 
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    die(json_encode(['status' => 'error', 'message' => 'Only POST Method supported']));
+}
+
 $dbConnection = new DatabaseConnection();
 $db = $dbConnection->getConnection();
 
