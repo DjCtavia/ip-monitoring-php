@@ -16,12 +16,24 @@ if ($db->connect_error) {
     $validatedIP = $db->real_escape_string($ipToAdd->getIP());
     $ipType = $ipToAdd->getIPTypeString();
 
-    $sqlRequest = "INSERT INTO ip_address (ip_address, ip_type) VALUES ('$validatedIP', '$ipType')";
+    try {
+        $stmt = $db->prepare("INSERT INTO ip_address (ip_address, ip_type) VALUES (?, ?)");
+        $stmt->bind_param("ss", $validatedIP, $ipType);
+        $success = $stmt->execute();
+        $stmt->close();
 
-    if ($db->query($sqlRequest) === TRUE) {
-        $response = ['status' => 'success', 'message' => 'IP address inserted successfully'];
-    } else {
-        $response = ['status' => 'error', 'message' => $db->error];
+        if ($success) {
+            $response = ['status' => 'success', 'message' => 'IP address inserted successfully'];
+        } else {
+            $response = ['status' => 'error', 'message' => 'Error inserting IP address'];
+        }
+    } catch (\Exception $e) {
+        // Check for a unique constraint violation error (code 1062 in MySQL)
+        if ($e->getCode() == 1062) {
+            $response = ['status' => 'error', 'message' => 'Duplicate entry for IP address'];
+        } else {
+            $response = ['status' => 'error', 'message' => $e->getMessage()];
+        }
     }
 }
 

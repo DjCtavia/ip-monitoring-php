@@ -30,8 +30,8 @@ USE
 
 CREATE TABLE IF NOT EXISTS `ip_address`
 (
-    id          INT PRIMARY KEY                    NOT NULL,
-    ip_address  VARCHAR(255)                       NOT NULL,
+    id          INT AUTO_INCREMENT PRIMARY KEY     NOT NULL,
+    ip_address  VARCHAR(255) UNIQUE                NOT NULL,
     ip_type     VARCHAR(255)                       NOT NULL,
     description TEXT,
     created_at  DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `ip_address`
 
 CREATE TABLE IF NOT EXISTS `group`
 (
-    id         INT PRIMARY KEY                    NOT NULL,
+    id         INT AUTO_INCREMENT PRIMARY KEY     NOT NULL,
     name       VARCHAR(255)                       NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `ip_list_group`
 
 CREATE TABLE IF NOT EXISTS ip_monitoring_status
 (
-    id            INT PRIMARY KEY                    NOT NULL,
+    id            INT AUTO_INCREMENT PRIMARY KEY     NOT NULL,
     ip_address_id INT,
     ping_status   BOOLEAN,
     timestamp     DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
