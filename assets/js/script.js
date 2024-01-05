@@ -84,25 +84,30 @@ function updateMonitoringCard(card, pingStatus, timestamp) {
     }
 }
 
+const DELAY_BETWEEN_EACH_MONITORING_UPDATE = 5000;
+
 async function doMonitoringList() {
-    const monitoringList = await API_monitoring_list();
+    try {
+        const monitoringList = await API_monitoring_list();
 
-    if (monitoringList.status !== 'success') return;
-
-    monitoringList.data.forEach(entry => {
-        const { ip_address, ip_type, ping_status, description, timestamp } = entry;
-
-        if (ipCardMap[ip_address]) {
-            updateMonitoringCard(ipCardMap[ip_address], ping_status ? 'Online' : 'Offline', timestamp);
-        } else {
-            const card = createMonitoringCard(description, ip_address, ping_status ? 'Online' : 'Offline', timestamp);
-            ipCardMap[ip_address] = card;
-            document.getElementById('monitored_ip_list').appendChild(card);
+        if (monitoringList.status !== 'success') {
+            throw new Error('Error fetching monitored IP list');
         }
-    });
+
+        monitoringList.data.forEach(entry => {
+            const {ip_address, ip_type, ping_status, description, timestamp} = entry;
+
+            if (ipCardMap[ip_address]) {
+                updateMonitoringCard(ipCardMap[ip_address], ping_status ? 'Online' : 'Offline', timestamp);
+            } else {
+                const card = createMonitoringCard(description, ip_address, ping_status ? 'Online' : 'Offline', timestamp);
+                ipCardMap[ip_address] = card;
+                document.getElementById('monitored_ip_list').appendChild(card);
+            }
+        });
+    } catch (error) {} finally {
+        setTimeout(doMonitoringList, DELAY_BETWEEN_EACH_MONITORING_UPDATE);
+    }
 }
 
 doMonitoringList();
-setInterval(async () => {
-    doMonitoringList();
-}, 5000)
