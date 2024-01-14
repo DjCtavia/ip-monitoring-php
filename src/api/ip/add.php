@@ -1,10 +1,10 @@
 <?php
 
 use database\DatabaseConnection;
-use utils\IPValidator;
+use ip\IPValidator;
 
 require_once __DIR__ . '/../../database/DatabaseConnection.php';
-require_once __DIR__ . '/../../utils/IPValidator.php';
+require_once __DIR__ . '/../../ip/IPValidator.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     die(json_encode(['status' => 'error', 'message' => 'Only POST Method supported']));
