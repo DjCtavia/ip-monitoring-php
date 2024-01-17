@@ -13,7 +13,7 @@ const WS_SERVER_PORT = 5353;
 $server = IoServer::factory(
     new HttpServer(
         new WsServer(
-            new WebSocketServer()
+            new WebSocketServer(true)
         )
     ),
     WS_SERVER_PORT

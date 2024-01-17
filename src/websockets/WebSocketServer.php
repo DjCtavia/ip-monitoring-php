@@ -11,10 +11,12 @@ use Ratchet\MessageComponentInterface;
 final class WebSocketServer implements MessageComponentInterface
 {
     private SplObjectStorage $clients;
+    private bool $debug;
 
-    public function __construct()
+    public function __construct(bool $debug = false)
     {
         $this->clients = new SplObjectStorage;
+        $this->debug = $debug;
     }
 
     #[Override]
@@ -28,6 +30,9 @@ final class WebSocketServer implements MessageComponentInterface
     #[Override]
     function onMessage(ConnectionInterface $from, $msg)
     {
+        if ($this->debug) {
+            echo "Message from ({$from->resourceId}): {$msg}\n";
+        }
     }
 
     #[Override]
@@ -48,7 +53,7 @@ final class WebSocketServer implements MessageComponentInterface
 
     function updateIP(IPPingDTO $ipPingDTO): void
     {
-        $message = json_encode(['type' => SocketMessageType::UPDATE_IP, $ipPingDTO]);
+        $message = json_encode(['type' => SocketMessageType::UPDATE_IP, 'data' => $ipPingDTO]);
 
         foreach ($this->clients as $con) {
             $con->send($message);
