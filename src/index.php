@@ -1,3 +1,11 @@
+<?php
+
+use Symfony\Component\Dotenv\Dotenv;
+
+require_once __DIR__ . '/../vendor/autoload.php';
+$dotenv = new Dotenv();
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -36,19 +44,17 @@
     </div>
 
 
-
-
-
-
-
-
     <template id="ip_monitoring_card_template">
         <h3 id="description">Description</h3>
         <p id="ipAddress">192.168.0.1</p>
         <p id="pingStatus">Online</p>
         <p id="timestamp"></p>
     </template>
+    <script>
+        const WS_SERVER_PORT = <?php echo $_ENV['WS_SERVER_PORT'] ?>;
+    </script>
     <script src="../assets/js/api.js"></script>
     <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/websocket.js"></script>
 </body>
 </html>

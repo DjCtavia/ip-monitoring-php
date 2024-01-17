@@ -2,6 +2,7 @@
     "require": {
         "cboden/ratchet": "^0.4.4",
         "ext-mysqli": "*",
-        "ratchet/pawl": "^0.4.1"
+        "ratchet/pawl": "^0.4.1",
+        "symfony/dotenv": "^7.0"
     }
 }

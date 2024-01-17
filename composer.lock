@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b8708c19d3c5c622e09cfc7054aa0dce",
+    "content-hash": "897e9fb6db2318d5a1a0e2e393f07643",
     "packages": [
         {
             "name": "cboden/ratchet",
@@ -1012,6 +1012,80 @@
                 }
             ],
             "time": "2023-05-23T14:45:45+00:00"
+        },
+        {
+            "name": "symfony/dotenv",
+            "version": "v7.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/dotenv.git",
+                "reference": "1e3e123fd1887fb2097ad38205a9a866a52d4dcc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/dotenv/zipball/1e3e123fd1887fb2097ad38205a9a866a52d4dcc",
+                "reference": "1e3e123fd1887fb2097ad38205a9a866a52d4dcc",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2"
+            },
+            "conflict": {
+                "symfony/console": "<6.4",
+                "symfony/process": "<6.4"
+            },
+            "require-dev": {
+                "symfony/console": "^6.4|^7.0",
+                "symfony/process": "^6.4|^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Dotenv\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Registers environment variables from a .env file",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "dotenv",
+                "env",
+                "environment"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/dotenv/tree/v7.0.2"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2023-12-28T19:18:20+00:00"
         },
         {
             "name": "symfony/http-foundation",

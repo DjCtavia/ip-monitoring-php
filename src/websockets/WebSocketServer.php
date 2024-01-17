@@ -11,12 +11,10 @@ use Ratchet\MessageComponentInterface;
 final class WebSocketServer implements MessageComponentInterface
 {
     private SplObjectStorage $clients;
-    private bool $debug;
 
-    public function __construct(bool $debug = false)
+    public function __construct()
     {
         $this->clients = new SplObjectStorage;
-        $this->debug = $debug;
     }
 
     #[Override]
@@ -30,7 +28,7 @@ final class WebSocketServer implements MessageComponentInterface
     #[Override]
     function onMessage(ConnectionInterface $from, $msg)
     {
-        if ($this->debug) {
+        if ($_ENV['DEBUG']) {
             echo "Message from ({$from->resourceId}): {$msg}\n";
         }
     }
