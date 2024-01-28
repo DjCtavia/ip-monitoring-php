@@ -80,4 +80,17 @@ class PingStatsDTO
             $this->averageTime
         );
     }
+
+    public function toMessage(): string
+    {
+        return json_encode([
+            'sentPackets' => $this->sentPackets,
+            'receivedPackets' => $this->receivedPackets,
+            'lostPackets' => $this->lostPackets,
+            'lostPercentage' => $this->lostPercentage,
+            'minTime' => $this->minTime,
+            'maxTime' => $this->maxTime,
+            'averageTime' => $this->averageTime,
+        ]);
+    }
 }

@@ -13,7 +13,7 @@ $dotenv->load(__DIR__ . '/../../.env');
 $_ENV['DEBUG'] = (bool)($_ENV['DEBUG'] ?? $_ENV['APP'] === 'dev');
 
 // Wrap the WebSocketServer with OriginCheck for origin validation
-$checkedApp = new OriginCheck(new WebSocketServer, ['localhost']);
+$checkedApp = new OriginCheck(new WsServer(new WebSocketServer), ['localhost']);
 
 $server = IoServer::factory(
     new HttpServer($checkedApp),

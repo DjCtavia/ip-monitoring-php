@@ -31,6 +31,11 @@ final class WebSocketServer implements MessageComponentInterface
         if ($_ENV['DEBUG']) {
             echo "Message from ({$from->resourceId}): {$msg}\n";
         }
+        foreach ($this->clients as $client) {
+            if ($from !== $client) {
+                $client->send($msg);
+            }
+        }
     }
 
     #[Override]

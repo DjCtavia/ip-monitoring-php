@@ -14,6 +14,8 @@ require_once __DIR__ . '/../websockets/Messenger/WebsocketMessenger.php';
 $dotenv = new Dotenv();
 $dotenv->load(__DIR__ . '/../../.env');
 
+$WebsocketMessenger = new WebsocketMessenger();
+
 echo "Ping server started processing\n";
 
 while (true) {
@@ -24,7 +26,8 @@ while (true) {
             try {
                 $ipPingDTO = (new Ping($ip['ip_address'], $_ENV['PING_TRY_BY_HOST'], $_ENV['PING_TIMEOUT_IN_MS']))->ping();
 //            (new IpRepository())->updateIP($ip['id'], $ipPingDTO);
-                WebsocketMessenger::send(WebsocketMessenger::formatMessage(SocketMessageType::UPDATE_IP, $ipPingDTO));
+                $message = $WebsocketMessenger->formatMessage(SocketMessageType::UPDATE_IP, $ipPingDTO->toMessage());
+                $WebsocketMessenger->send($message);
                 echo "[OK] Ping server succeed to process IP: " . $ip['ip_address'] . "\n";
             } catch (Exception $e) {
                 echo "[FAIL] Ping server failed to process IP: " . $ip['ip_address'] . "\n";
