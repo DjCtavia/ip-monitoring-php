@@ -3,6 +3,7 @@
 namespace websockets\Messenger;
 
 
+use enums\SocketMessageType;
 use function Ratchet\Client\connect;
 
 require_once __DIR__ . '/../../../vendor/autoload.php';
@@ -19,5 +20,10 @@ class WebsocketMessenger
         }, function ($e) {
             echo "[ERROR] Websocket Messenger: {$e->getMessage()}\n";
         });
+    }
+
+    public static function formatMessage(SocketMessageType $type, $data): string
+    {
+        return json_encode(['type' => $type, 'data' => $data]);
     }
 }

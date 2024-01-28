@@ -52,7 +52,6 @@ $dotenv->load(__DIR__ . '/../.env');
         <p id="pingStatus">Online</p>
         <p id="timestamp"></p>
     </template>
-    <script src="https://cdn.socket.io/4.7.4/socket.io.min.js" integrity="sha384-Gr6Lu2Ajx28mzwyVR8CFkULdCU7kMlZ9UthllibdOSo6qAiN+yXNHqtgdTvFXMT4" crossorigin="anonymous"></script>
     <script>
         const WS_SERVER_PORT = <?php echo $_ENV['WS_SERVER_PORT'] ?>;
     </script>
