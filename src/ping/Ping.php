@@ -34,12 +34,19 @@ class Ping
 
     private function extractData(array $output): PingStatsDTO
     {
+        echo "base: " . print_r($output, true) . "\n\n";
+
         $packetsStatsLines = array_filter($output, fn($line) => str_contains($line, '%)'));
-        preg_match('/(\d).+(\d).+(\d).+(\d)/', implode("\n", $packetsStatsLines), $packetsStats);
+        preg_match('/: .+(\d).+(\d).+(\d).+(\d)/', implode("\n", $packetsStatsLines), $packetsStats);
 
-        $durationStatsLines = array_filter($output, fn($line) => str_contains($line, '=') && str_contains($line, 'ms'));
-        preg_match('/(\d).+(\d).+(\d)/', implode("\n", $durationStatsLines), $durationStats);
+        $durationStatsLines = array_filter($output, fn($line) => str_contains($line, '=') && str_contains($line, ',') && str_contains($line, 'ms'));
+        preg_match('/.+(\d).+(\d).+(\d)/', implode("\n", $durationStatsLines), $durationStats);
 
+        echo "Ping stats for " . $this->host . "\n";
+        echo "Packets stats line: " . print_r($packetsStatsLines, true);
+        echo "\nPackets stats: \n" . print_r($packetsStats, true) ."\n";
+        echo "Duration stats line: " . print_r($durationStatsLines, true);
+        echo "\nDurations stats: \n" . print_r($durationStats, true) ."\n";
         return new PingStatsDTO(
             (int) $packetsStats[1],
             (int) $packetsStats[2],
