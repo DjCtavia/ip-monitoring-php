@@ -12,16 +12,11 @@ $dotenv = new Dotenv();
 $dotenv->load(__DIR__ . '/../../.env');
 $_ENV['DEBUG'] = (bool)($_ENV['DEBUG'] ?? $_ENV['APP'] === 'dev');
 
-// Create the WebSocketServer instance
-$webSocketServer = new WebSocketServer();
-
 // Wrap the WebSocketServer with OriginCheck for origin validation
-$checkedApp = new OriginCheck($webSocketServer, ['http://localhost']);
+$checkedApp = new OriginCheck(new WebSocketServer, ['localhost']);
 
 $server = IoServer::factory(
-    new HttpServer(
-        new WsServer($checkedApp)
-    ),
+    new HttpServer($checkedApp),
     $_ENV['WS_SERVER_PORT']
 );
 
