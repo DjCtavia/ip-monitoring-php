@@ -1,6 +1,6 @@
 const API_IP_add = async (ip) => {
     try {
-        const response = await fetch('/api/ip/add.php', {
+        const response = await fetch('/src/api/ip/add.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -20,7 +20,7 @@ const API_IP_add = async (ip) => {
 
 const API_monitoring_list = async () => {
     try {
-        const response = await fetch('/api/monitoring/list.php', {
+        const response = await fetch('/src/api/monitoring/list.php', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
