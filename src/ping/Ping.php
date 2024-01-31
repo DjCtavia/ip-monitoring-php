@@ -27,12 +27,12 @@ class Ping
         exec($command, $output, $result);
 
         if ($result === 0) {
-            return $this->extractData($output);
+            return $this->extractData($this->host, $output);
         }
         throw new PingFailedException($this->host);
     }
 
-    private function extractData(array $output): PingStatsDTO
+    private function extractData(string $host, array $output): PingStatsDTO
     {
         $packetsStatsLines = array_filter($output, fn($line) => str_contains($line, '%)'));
         preg_match('/: .+(\d).+(\d).+(\d).+(\d)/', implode("\n", $packetsStatsLines), $packetsStats);
@@ -41,6 +41,7 @@ class Ping
         preg_match('/.+(\d).+(\d).+(\d)/', implode("\n", $durationStatsLines), $durationStats);
 
         return new PingStatsDTO(
+            $host,
             (int) $packetsStats[1],
             (int) $packetsStats[2],
             (int) $packetsStats[3],

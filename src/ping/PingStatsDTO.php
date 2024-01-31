@@ -4,6 +4,7 @@ namespace ping;
 
 class PingStatsDTO
 {
+    private string $host;
     private int $sentPackets;
     private int $receivedPackets;
     private int $lostPackets;
@@ -11,17 +12,21 @@ class PingStatsDTO
     private int $minTime;
     private int $maxTime;
     private int $averageTime;
+    private string $timestamp;
 
     public function __construct(
-        int $sentPackets,
-        int $receivedPackets,
-        int $lostPackets,
-        int $lostPercentage,
-        int $minTime,
-        int $maxTime,
-        int $averageTime
+        string $host = null,
+        int $sentPackets = null,
+        int $receivedPackets = null,
+        int $lostPackets = null,
+        int $lostPercentage = null,
+        int $minTime = null,
+        int $maxTime = null,
+        int $averageTime = null,
+        string $timestamp = null
     )
     {
+        $this->host = $host;
         $this->sentPackets = $sentPackets;
         $this->receivedPackets = $receivedPackets;
         $this->lostPackets = $lostPackets;
@@ -29,6 +34,7 @@ class PingStatsDTO
         $this->minTime = $minTime;
         $this->maxTime = $maxTime;
         $this->averageTime = $averageTime;
+        $this->timestamp = $timestamp ?? date('Y-m-d H:i:s');
     }
 
     public function getSentPackets(): int
@@ -84,6 +90,7 @@ class PingStatsDTO
     public function toMessage(): string
     {
         return json_encode([
+            'host' => $this->host,
             'sentPackets' => $this->sentPackets,
             'receivedPackets' => $this->receivedPackets,
             'lostPackets' => $this->lostPackets,
@@ -91,6 +98,7 @@ class PingStatsDTO
             'minTime' => $this->minTime,
             'maxTime' => $this->maxTime,
             'averageTime' => $this->averageTime,
+            'timestamp' => $this->timestamp,
         ]);
     }
 }

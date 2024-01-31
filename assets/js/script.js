@@ -106,7 +106,7 @@ async function doMonitoringList() {
             }
         });
     } catch (error) {} finally {
-        setTimeout(doMonitoringList, DELAY_BETWEEN_EACH_MONITORING_UPDATE);
+        // setTimeout(doMonitoringList, DELAY_BETWEEN_EACH_MONITORING_UPDATE);
     }
 }
 

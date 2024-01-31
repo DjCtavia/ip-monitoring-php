@@ -14,6 +14,7 @@ function connectWebSocket() {
     socket.addEventListener('message', async function (event) {
         console.log(event);
         const data = await JSON.parse(event.data);
+        const message = await JSON.parse(data.message);
 
         // verify data variable contains type and message properties
         if (!data.type || !data.message) {
@@ -22,7 +23,10 @@ function connectWebSocket() {
         }
 
         if (data.type === SocketMessageType.UPDATE_IP) {
-            console.log('IP address updated with: ', data.message);
+            const pingStatus = (message.sentPackets / 2) >= message.lostPackets ? 'Online' : 'Offline';
+            updateMonitoringCard(ipCardMap[message.host],
+                (message.sentPackets / 2) >= message.lostPackets ? 'Online' : 'Offline',
+                message.timestamp);
         }
     });
 
