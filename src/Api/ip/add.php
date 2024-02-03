@@ -1,10 +1,12 @@
 <?php
 
-use database\DatabaseConnection;
-use ip\IPValidator;
+namespace Api\Ip;
 
-require_once __DIR__ . '/../../database/DatabaseConnection.php';
-require_once __DIR__ . '/../../ip/IPValidator.php';
+use Database\DatabaseConnection;
+use Validator\IpValidator;
+
+require_once __DIR__ . '/../../Database/DatabaseConnection.php';
+require_once __DIR__ . '/../../Validator/IpValidator.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     die(json_encode(['status' => 'error', 'message' => 'Only POST Method supported']));
@@ -21,7 +23,7 @@ if ($db->connect_error) {
     $jsonData = json_decode($jsonInput, true);
 
     if (isset($jsonData['ip'])) {
-        $ipToAdd = new IPValidator($jsonData['ip']);
+        $ipToAdd = new IpValidator($jsonData['ip']);
         $validatedIP = $db->real_escape_string($ipToAdd->getIP());
         $ipType = $ipToAdd->getIPTypeString();
 

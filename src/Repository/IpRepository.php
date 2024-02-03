@@ -1,10 +1,11 @@
 <?php
 
 namespace Repository;
-require_once __DIR__ . '/../database/DatabaseConnection.php';
 
-use database\DatabaseConnection;
+use Database\DatabaseConnection;
 use mysqli;
+
+require_once __DIR__ . '/../Database/DatabaseConnection.php';
 
 class IpRepository
 {

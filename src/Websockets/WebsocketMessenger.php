@@ -1,12 +1,11 @@
 <?php
 
-namespace websockets\Messenger;
+namespace Websockets;
 
-
-use enums\SocketMessageType;
+use Enums\SocketMessageType;
 use WebSocket\Client;
 
-require_once __DIR__ . '/../../../vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 
 class WebsocketMessenger
 {
@@ -24,6 +23,6 @@ class WebsocketMessenger
 
     public static function formatMessage(SocketMessageType $type, $data): string
     {
-        return json_encode(['type' => $type, 'message' => $data]);
+        return json_encode(['type' => $type->getValue(), 'message' => $data]);
     }
 }

@@ -1,16 +1,17 @@
 <?php
 
-use enums\SocketMessageType;
+use Enums\SocketMessageType;
 use Ping\Ping;
 use Repository\IpRepository;
 use Symfony\Component\Dotenv\Dotenv;
-use websockets\Messenger\WebsocketMessenger;
+use Websockets\WebsocketMessenger;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../Repository/IpRepository.php';
-require_once __DIR__ . '/../ping/Ping.php';
-require_once __DIR__ . '/../enums/SocketMessageType.php';
-require_once __DIR__ . '/../websockets/Messenger/WebsocketMessenger.php';
+require_once __DIR__ . '/../Ping/Ping.php';
+require_once __DIR__ . '/../Enums/SocketMessageType.php';
+require_once __DIR__ . '/../Websockets/WebsocketMessenger.php';
+
 $dotenv = new Dotenv();
 $dotenv->load(__DIR__ . '/../../.env');
 
@@ -26,7 +27,7 @@ while (true) {
             try {
                 $ipPingDTO = (new Ping($ip['ip_address'], $_ENV['PING_TRY_BY_HOST'], $_ENV['PING_TIMEOUT_IN_MS']))->ping();
 //            (new IpRepository())->updateIP($ip['id'], $ipPingDTO);
-                $message = $WebsocketMessenger->formatMessage(SocketMessageType::UPDATE_IP, $ipPingDTO->toMessage());
+                $message = $WebsocketMessenger->formatMessage(new SocketMessageType(SocketMessageType::UPDATE_IP), $ipPingDTO->toMessage());
                 $WebsocketMessenger->send($message);
                 echo "[OK] Ping server succeed to process IP: " . $ip['ip_address'] . "\n";
             } catch (Exception $e) {

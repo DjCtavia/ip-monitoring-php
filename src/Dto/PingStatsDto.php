@@ -1,8 +1,8 @@
 <?php
 
-namespace ping;
+namespace Dto;
 
-class PingStatsDTO
+class PingStatsDto
 {
     private string $host;
     private int $sentPackets;

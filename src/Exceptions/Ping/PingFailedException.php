@@ -1,6 +1,6 @@
 <?php
 
-namespace ping\Exception;
+namespace Exceptions\Ping;
 
 use Exception;
 

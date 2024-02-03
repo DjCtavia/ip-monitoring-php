@@ -1,11 +1,12 @@
 <?php
 
-namespace ping;
+namespace Ping;
 
-use ping\Exception\PingFailedException;
+use Dto\PingStatsDto;
+use Exceptions\Ping\PingFailedException;
 
-require_once __DIR__ . '/Exception/PingFailedException.php';
-require_once __DIR__ . '/PingStatsDTO.php';
+require_once __DIR__ . '/../Exceptions/Ping/PingFailedException.php';
+require_once __DIR__ . '/../Dto/PingStatsDto.php';
 
 class Ping
 {
@@ -20,7 +21,7 @@ class Ping
         $this->timeoutInMS = $timeoutInMS;
     }
 
-    public function ping(): PingStatsDTO
+    public function ping(): PingStatsDto
     {
         $command = sprintf('ping -n %s -w %s %s', escapeshellarg($this->numberOfPing), escapeshellarg($this->timeoutInMS), escapeshellarg($this->host));
 
@@ -32,7 +33,7 @@ class Ping
         throw new PingFailedException($this->host);
     }
 
-    private function extractData(string $host, array $output): PingStatsDTO
+    private function extractData(string $host, array $output): PingStatsDto
     {
         $packetsStatsLines = array_filter($output, fn($line) => str_contains($line, '%)'));
         preg_match('/: .+(\d).+(\d).+(\d).+(\d)/', implode("\n", $packetsStatsLines), $packetsStats);
@@ -40,7 +41,7 @@ class Ping
         $durationStatsLines = array_filter($output, fn($line) => str_contains($line, '=') && str_contains($line, ',') && str_contains($line, 'ms'));
         preg_match('/.+(\d).+(\d).+(\d)/', implode("\n", $durationStatsLines), $durationStats);
 
-        return new PingStatsDTO(
+        return new PingStatsDto(
             $host,
             (int) $packetsStats[1],
             (int) $packetsStats[2],

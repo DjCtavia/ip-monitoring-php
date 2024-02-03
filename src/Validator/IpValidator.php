@@ -1,12 +1,12 @@
 <?php
 
-namespace ip;
+namespace Validator;
 
-use enums\IPTypeEnum;
+use Enums\IPTypeEnum;
 
-require_once __DIR__ . '/../enums/IPTypeEnum.php';
+require_once __DIR__ . '/../Enums/IPTypeEnum.php';
 
-class IPValidator
+class IpValidator implements ValidatorInterface
 {
     private string $ip;
     private IPTypeEnum $ipType;
@@ -14,19 +14,18 @@ class IPValidator
     public function __construct($ip)
     {
         $this->ip = $ip;
-        $this->validateIP();
     }
 
-    private function validateIP(): void
+    public function validate($value): bool
     {
         $isIPv4 = filter_var($this->ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
         $isIPv6 = filter_var($this->ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6);
 
         if ($isIPv4 || $isIPv6) {
-            $this->ipType = $isIPv4 ? IPTypeEnum::IPV4 : IPTypeEnum::IPV6;
-        } else {
-            die(json_encode(['status' => 'error', 'message' => "Invalid IP address: {$this->ip}"]));
+            $this->ipType = $isIPv4 ? new IPTypeEnum(IPTypeEnum::IPV4) : new IPTypeEnum(IPTypeEnum::IPV6);
+            return true;
         }
+        return false;
     }
 
     public function getIP(): string
@@ -41,6 +40,6 @@ class IPValidator
 
     public function getIPTypeString(): string
     {
-        return $this->ipType->value;
+        return $this->ipType->getValue();
     }
 }

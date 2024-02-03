@@ -1,8 +1,10 @@
 <?php
 
-use database\DatabaseConnection;
+namespace Api\Monitoring;
 
-require_once __DIR__ . '/../../database/DatabaseConnection.php';
+use Database\DatabaseConnection;
+
+require_once __DIR__ . '/../../Database/DatabaseConnection.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     die(json_encode(['status' => 'error', 'message' => 'Only GET Method supported']));

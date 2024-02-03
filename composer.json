@@ -4,6 +4,8 @@
         "ext-mysqli": "*",
         "symfony/dotenv": "^5.4",
         "textalk/websocket": "^1.5",
-        "ext-parallel": "*"
+        "ext-parallel": "*",
+      "ext-json": "*",
+        "myclabs/php-enum": "^1.8"
     }
 }
