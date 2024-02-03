@@ -2,7 +2,8 @@
     "require": {
         "cboden/ratchet": "^0.4.4",
         "ext-mysqli": "*",
-        "symfony/dotenv": "^7.0",
-        "textalk/websocket": "^1.5"
+        "symfony/dotenv": "^5.4",
+        "textalk/websocket": "^1.5",
+        "ext-parallel": "*"
     }
 }
