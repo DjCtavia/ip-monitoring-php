@@ -6,6 +6,7 @@ use Enums\SocketMessageType;
 use WebSocket\Client;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../Enums/SocketMessageType.php';
 
 class WebsocketMessenger
 {

@@ -7,10 +7,15 @@ use Exceptions\Parallelism\TaskToExecuteNotSetException;
 use parallel\Future;
 use parallel\Runtime;
 
+require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/TaskInterface.php';
+require_once __DIR__ . '/../Exceptions/Parallelism/TaskAlreadyRunningException.php';
+require_once __DIR__ . '/../Exceptions/Parallelism/TaskToExecuteNotSetException.php';
+
 class BaseTask implements TaskInterface
 {
     private runtime $runtime;
-    private $taskToExecute;
+    protected $taskToExecute;
     private ?future $future;
 
     public function __construct(callable $taskToExecute = null)

@@ -2,6 +2,8 @@
 
 namespace Parallelism;
 
+require_once __DIR__ . '/TaskInterface.php';
+
 class TaskList
 {
     /**
@@ -9,19 +11,24 @@ class TaskList
      */
     private array $tasks = [];
 
-    public function add(TaskInterface $task): void
+    public function addTask(TaskInterface $task): void
     {
         $this->tasks[] = $task;
     }
 
-    public function runAll(): void
+    public function executeTasks(): void
     {
         array_walk($this->tasks, fn(TaskInterface $task) => $task->run());
     }
 
-    public function stopAll(): void
+    public function stopTasks(): void
     {
         array_walk($this->tasks, fn(TaskInterface $task) => $task->stop());
+    }
+
+    public function findTaskNotRunning(): ?TaskInterface
+    {
+        return array_reduce($this->tasks, fn($carry, $task) => $carry ?? ($task->isRunning() ? null : $task));
     }
 
     public function isTasksRunning(): bool
