@@ -25,7 +25,10 @@ if ($db->connect_error) {
     if (isset($jsonData['ip'])) {
         $ipToAdd = new IpValidator($jsonData['ip']);
         $validatedIP = $db->real_escape_string($ipToAdd->getIP());
-        $ipType = $ipToAdd->getIPTypeString();
+
+        if ($ipToAdd->validate()) {
+            $ipType = $ipToAdd->getIPTypeString();
+        }
 
         try {
             $stmt = $db->prepare("INSERT INTO ip_address (ip_address, ip_type) VALUES (?, ?)");

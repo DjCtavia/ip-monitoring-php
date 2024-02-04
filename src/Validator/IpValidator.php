@@ -4,6 +4,7 @@ namespace Validator;
 
 use Enums\IPTypeEnum;
 
+require_once __DIR__ . '/ValidatorInterface.php';
 require_once __DIR__ . '/../Enums/IPTypeEnum.php';
 
 class IpValidator implements ValidatorInterface
@@ -16,7 +17,7 @@ class IpValidator implements ValidatorInterface
         $this->ip = $ip;
     }
 
-    public function validate($value): bool
+    public function validate(): bool
     {
         $isIPv4 = filter_var($this->ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
         $isIPv6 = filter_var($this->ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6);
